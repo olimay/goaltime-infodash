@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Time-Goals Infodash Example</title>
+<script src="http://d3js.org/d3.v3.min.js"></script> 
+<style>
+
+  .chart rect {
+    fill: lightgray;
+  }
+
+  .chart rect.quota {
+    fill: slategray;
+  }
+
+  .chart rect.activity {
+    fill: darkviolet;
+  }
+
+  .chart text {
+    fill: white;
+    font: 10px monospace;
+    text-anchor: end;
+  }
+</style>
+</head>
+<body>
+<svg class="chart" height="1" width="1"></svg>
+<script type="text/javascript" src="timebar.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+// dummy data
+var rates = [
+  { name: "dstoggl", value: 120 },
+  { name: "his131fa15", value: 60 },
+  { name: "service", value: 240 }
+];
+
+var totals = [
+  { name: "dstoggl", value: 100 },
+  { name: "his131fa15", value: 50 },
+  { name: "service", value: 111 }
+]
+
+var quotabar = Object.create(timebar),
+    activitybar = Object.create(timebar);
+var margins = { top: 10, bottom: 10, left: 10, right: 10 },
+    barHeight = 20,
+    chartWidth = 500;
+var timescale = 12 * 60;
+quotabar.init("quota", barHeight, chartWidth, margins);
+activitybar.init("activity", barHeight, chartWidth, margins);
+
+quotabar.update(rates, timescale);
+activitybar.update(totals, timescale);
+
+
+</script>
+</body>
+</html>
